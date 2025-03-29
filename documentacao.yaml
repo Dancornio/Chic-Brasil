@@ -1,0 +1,361 @@
+openapi: 3.0.3
+info:
+  title: Ecommerce API - "Chic-Brasil " 
+  description: |-
+    Esta documentação serve apenas como fins didaticos da disciplina de projeto aplicado do curso de Sistemas de informação do 2° semestre.  
+    
+  
+  contact:
+    email: ammon@tutamail.com
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  version: 1.0.11
+externalDocs:
+  description: Saiba mais sobre o Swagger
+  url: http://swagger.io
+servers:
+  - url: Isso é uma demonstração
+  
+  
+tags:
+  - name: product
+    description: Tudo sobre a classe produto
+    externalDocs:
+      description: Saiba mais
+      url: http://swagger.io
+  - name: store
+    description: Acesso aos pedidos da loja de roupas
+    externalDocs:
+      description: Saiba mais sobre o inventario
+      url: http://swagger.io
+  - name: user
+    description: Operações do usuário
+    
+    
+paths:
+  /product:
+    put:
+      tags:
+      - product
+      summary: Atualiza um produto existente
+      description: Atualiza um produto existente pelo Id
+      operationId: updateProduct
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: ID fornecido invalido
+        '404':
+          description: Produto não encontrado
+        '422':
+          description: Validation exception
+          
+    post:
+      tags:
+      - product
+      summary: Adiciona um novo produto na loja
+      description: Adiciona um novo produto na loja
+      operationId: addProduct
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+          
+
+  /product/findByTags:
+    get:
+      tags:
+        - product
+      summary: Procure Produtos por sua tag/tags
+      description: Várias tags podem ser fornecidas com strings separadas por vírgula. Use tag1, tag2, tag3 para teste.
+      operationId: findProdtcsByTags
+      parameters:
+        - name: tags
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+          
+          
+  /product/findByStatus:
+    get:
+      tags:
+        - product
+      summary: Procure Produtos por seu Status
+      description: Vários valores de status podem ser fornecidos com strings separadas por vírgulas.
+      operationId: findProdtcsByStatus
+      parameters:
+        - name: status
+          in: query
+          description: Tags to filter by
+          required: false
+          explode: true
+          schema:
+            type: array
+            items:
+              type: string
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+          
+  /product/{productId}:
+    get:
+      tags:
+        - product
+      summary: Procure Produtos por seu Status
+      description: Vários valores de status podem ser fornecidos com strings separadas por vírgulas.
+      operationId: findProdtcsById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+    post:
+      tags:
+      - product
+      summary: Atualiza um produto na loja com dados de formulário
+      description: Atualiza um produto na loja com dados de formulário pelo seu ID
+      operationId: updateById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+    delete:
+      tags:
+      - product
+      summary: Deleta um produto na loja com dados de formulário
+      description: Deleta um produto na loja com dados de formulário pelo seu ID
+      operationId: deleteById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+  
+  /product/{productId}/uploadImage:
+    post:
+      tags:
+      - product
+      summary: Envia uma imagem
+      description: Envia uma imagem pelo seu ID
+      operationId: uploadImageById
+      parameters:
+        - name: productId
+          in: path
+          description: ID of pet to return
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+
+  /store/inventory:
+    get:
+      tags:
+      - store
+      summary: Retorna um mapa de códigos de status para quantidades
+      description: Retorna um mapa de códigos de status para quantidades
+      operationId: returnInventory
+      responses:
+        '200':
+          description: Sucesso na operação
+  
+  /store/order:
+    post:
+      tags:
+      - store
+      summary: Faça um novo pedido na loja
+      description: Faça um novo pedido na loja
+      operationId: placeOrder
+      responses:
+        '200':
+          description: Sucesso na operação
+
+  /store/order/{orderId}:
+    get:
+      tags:
+        - store
+      summary: Procure por uma ordem de pedido pelo seu Id
+      description: Procure por uma ordem de pedido pelo seu Id
+      operationId: placeOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+          
+    delete:
+      tags:
+        - store
+      summary:  Delete uma ordem de pedido pelo seu Id
+      description: Delete uma ordem de pedido pelo seu Id
+      operationId: deleteOrderById
+      parameters:
+        - name: orderId
+          in: path
+          description: ID of order that needs to be fetched
+          required: true
+          schema:
+            type: integer
+            format: int64
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+  /user:
+    post:
+      tags:
+        - user
+      summary: Cria um usuário
+      description: Cria um usuário
+      operationId: newUser
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+  /user/login:
+    get:
+      tags:
+        - user
+      summary: Verifica o login de algum usuário
+      description: Verifica o login de algum usuário
+      operationId: loginUser
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+  
+  /user/logout:
+    get:
+      tags:
+        - user
+      summary: Desloga o usuário.
+      description: Desloga o usuário.
+      operationId: logoutUser
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+  
+  /user/{userName}:
+    get:
+      tags:
+        - user
+      summary: Retorna um usuário pelo seu nome
+      description: retorna um usuário pelo seu nome
+      parameters:
+        - name: userName
+          in: path
+          description: Nome do usuário para ser encontrado
+          required: true
+          schema:
+            type: string
+            format:
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+
+    put:
+      tags:
+        - user
+      summary: Atualiza um usuário pelo seu nome
+      description: Atualiza um usuário pelo seu nome
+      operationId: updateUser
+      parameters:
+        - name: userName
+          in: path
+          description: Nome do usuário para ser encontrado
+          required: true
+          schema:
+            type: string
+            format: 
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+    
+    delete:
+      tags:
+        - user
+      summary: Detela um usuário pelo seu nome
+      description: Detela um usuário pelo seu nome
+      operationId: deleteUser
+      parameters:
+        - name: userName
+          in: path
+          description: Nome do usuário para ser encontrado
+          required: true
+          schema:
+            type: string
+            format: 
+      responses:
+        '200':
+          description: Sucesso na operação
+        '400':
+          description: Valor dos status invalido
+
+      
+
+
