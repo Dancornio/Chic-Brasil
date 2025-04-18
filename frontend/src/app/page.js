@@ -3,7 +3,7 @@ import { Poppins } from "next/font/google";
 
 
 import Image from "next/image";
-import TopBar from "./components/TopBar";
+import TopBar from "../components/ui/TopBar";
 
 
 
@@ -26,7 +26,7 @@ export default function Home() {
       <section className="">
         <div className={` ${poppins.className} w-full h-[1900px] relative`}>
           <div className="w-full h-[1900px] left-0 top-0 absolute bg-[#ffffff]" />
-            <div className="w-[440px] left-[202px] top-[328px] absolute justify-start text-black text-[64px] font-medium ">Coleção de<br/>verão</div>
+            <p className="w-[440px] left-[202px] top-[328px] absolute justify-start text-black text-[64px] font-medium motion-preset-typewriter-[24]">Coleção de<br/>verão</p>
             <a className="left-[206px] top-[555px] absolute justify-start text-black text-2xl font-medium" href="#Colecao">Compre agora</a>
             <div className="w-[121px] h-0 left-[206px] top-[604px] absolute outline  outline-offset-[-1px] outline-black"></div>
             <Image
@@ -37,8 +37,9 @@ export default function Home() {
               height={800}
             />
           </div>
-          
       </section>
+
+      
     </div>
     
   );

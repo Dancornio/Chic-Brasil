@@ -1,8 +1,8 @@
 import { Roboto } from "next/font/google";
-import MidAccountAlert from "./svgs/MidAccountAlert";
-import Shopping from "./svgs/Shopping";
-import SearchIcon from "./svgs/SearchIcon";
-import HeartIcon from "./svgs/HeartIcon";
+import MidAccountAlert from "../svgs/MidAccountAlert";
+import Shopping from "../svgs/Shopping";
+import SearchIcon from "../svgs/SearchIcon";
+import HeartIcon from "../svgs/HeartIcon";
 
 const roboto = Roboto({
   subsets: ['latin'],
