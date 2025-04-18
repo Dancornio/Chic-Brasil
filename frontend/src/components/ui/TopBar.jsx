@@ -31,7 +31,7 @@ export default function TopBar() {
             
           <div className="absolute w-[247px] h-7 top-9 left-4/5">
             <ul className="absolute w-7 h-7 top-0  transform -translate-x-1.5 flex justify-between gap-[2.813rem]" >
-              <li className="tracking-normal leading-normal"><a href="#Conta"><MidAccountAlert/></a></li>
+              <li className="tracking-normal leading-normal motion-safe:hover:animate-bounce"><a href="#Conta"><MidAccountAlert/></a></li>
               <li className="tracking-normal leading-normal"><a href="#Shopping"><Shopping/></a></li>
               <li className="tracking-normal leading-normal"><a href="#busca"><SearchIcon/></a></li>
               <li className="tracking-normal leading-normal"><a href="#Lista"><HeartIcon/></a></li>
